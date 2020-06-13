@@ -1,6 +1,7 @@
 #ifndef KERNEL_HPP
 #define KERNEL_HPP
 #include <CGAL/Cartesian.h>
+#include <CGAL/MP_Float.h>
 #include <cstddef>
 #include"ra/interval.hpp"
 
@@ -22,6 +23,8 @@ namespace ra::geometry {
 			using itv = typename ra::math::interval<R>;
 			// Type used for indeterminate_result class
 			using idr = typename ra::math::indeterminate_result;
+			// Type used for exact arithmetic
+			using exct = typename CGAL::MP_Float; 
 			
 			// The possible outcomes of an orientation test.
 			enum class Orientation : int {
@@ -66,8 +69,19 @@ namespace ra::geometry {
 
 			// Member function to compute 3 by 3 determinant
 			template<class DR>
-			DR determinant_3_by_3(const DR (&m)[3][3]) const {
+			static DR determinant_3_by_3(const DR (&m)[3][3]) {
 				DR det = ( (m[0][0]*m[1][1]*m[2][2])+(m[0][1]*m[1][2]*m[2][0])+(m[0][2]*m[1][0]*m[2][1]) ) - ( (m[2][0]*m[1][1]*m[0][2])+(m[2][1]*m[1][2]*m[0][0])+(m[2][2]*m[1][0]*m[0][1]) );
+				return det;
+			}
+
+			// Member function to compute 4 by 4 determinant
+			template<class DDR>
+			static DDR determinant_4_by_4(const DDR (&m)[4][4]) {
+				DDR sub0[3][3] = {m[1][1],m[1][2],m[1][3],m[2][1],m[2][2],m[2][3],m[3][1],m[3][2],m[3][3]};
+				DDR sub1[3][3] = {m[0][1],m[0][2],m[0][3],m[2][1],m[2][2],m[2][3],m[3][1],m[3][2],m[3][3]};
+				DDR sub2[3][3] = {m[0][1],m[0][2],m[0][3],m[1][1],m[1][2],m[1][3],m[3][1],m[3][2],m[3][3]};
+				DDR sub3[3][3] = {m[0][1],m[0][2],m[0][3],m[1][1],m[1][2],m[1][3],m[2][1],m[2][2],m[2][3]};
+				DDR det = (m[0][0]*determinant_3_by_3(sub0)) - (m[1][0]*determinant_3_by_3(sub1)) + (m[2][0]*determinant_3_by_3(sub2)) - (m[3][0]*determinant_3_by_3(sub3));
 				return det;
 			}
 			
@@ -86,11 +100,43 @@ namespace ra::geometry {
 				}
 				catch(const idr& e){
 					++(stat_.orientation_exact_count);
-					Real matrix[3][3] = {(a.x()),(b.x()),(c.x()),(a.y()),(b.y()),(c.y()),Real(1.0),Real(1.0),Real(1.0)};
-					Real det = determinant_3_by_3(matrix);
-					if(det < Real(0)){ return (Orientation::right_turn); }
-					else if(det > Real(0)){ return (Orientation::left_turn); }
+					exct matrix[3][3] = {(a.x()),(b.x()),(c.x()),(a.y()),(b.y()),(c.y()),exct(1.0),exct(1.0),exct(1.0)};
+					exct det = determinant_3_by_3(matrix);
+					if(det < exct(0)){ return (Orientation::right_turn); }
+					else if(det > exct(0)){ return (Orientation::left_turn); }
 					else{ return (Orientation::collinear); }
+				}
+			}
+
+			// Determines how the point d is positioned relative to the
+			// oriented circle passing through the points a, b, and c
+			// (in that order).
+			// Precondition: The points a, b, and c are not collinear.
+			Oriented_side side_of_oriented_circle(const Point& a, const Point& b, const Point& c, const Point& d){
+				try{
+					++(stat_.side_of_oriented_circle_total_count);
+					itv ax(a.x()); itv ay(a.y()); itv bx(b.x()); itv by(b.y()); itv cx(c.x()); itv cy(c.y());
+					itv dx(d.x()); itv dy(d.y());
+					itv ar((ax*ax)+(ay*ay)); itv br((bx*bx)+(by*by)); itv cr((cx*cx)+(cy*cy));
+					itv dr((dx*dx)+(dy*dy));
+					itv matrix[4][4] = {ax,bx,cx,dx,ay,by,cy,dy,ar,br,cr,dr,itv(1.0),itv(1.0),itv(1.0),itv(1.0)};
+					itv det = determinant_4_by_4(matrix);
+					if( (det.sign()) == -1 ) { return (Oriented_side::on_negative_side); }
+					else if( (det.sign()) == 1 ) { return (Oriented_side::on_positive_side); }
+					else{ return (Oriented_side::on_boundary); }
+				}
+				catch(const idr& e){
+					++(stat_.side_of_oriented_circle_exact_count);
+					exct ax(a.x()); exct ay(a.y()); exct bx(b.x()); exct by(b.y()); 
+					exct cx(c.x()); exct cy(c.y());
+					exct dx(d.x()); exct dy(d.y());
+					exct ar((ax*ax)+(ay*ay)); exct br((bx*bx)+(by*by)); exct cr((cx*cx)+(cy*cy));
+					exct dr((dx*dx)+(dy*dy));
+					exct matrix[4][4] = {ax,bx,cx,dx,ay,by,cy,dy,ar,br,cr,dr,exct(1.0),exct(1.0),exct(1.0),exct(1.0)};
+					exct det = determinant_4_by_4(matrix);
+					if(det < exct(0)){ return (Oriented_side::on_negative_side); }
+					else if(det > exct(0)){ return (Oriented_side::on_positive_side); }
+					else{ return (Oriented_side::on_boundary); }
 				}
 			}
 
