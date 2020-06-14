@@ -36,22 +36,13 @@ namespace ra::math {
 				unsigned long arithmetic_op_count;
 			};
 
-			void keep_order() {
-				real_type temp;
-				if(lower_>upper_){
-					temp = lower_;
-					lower_ = upper_;
-					upper_ = temp;
-				}
-			}
-
 			interval(real_type set_value = real_type(0)) : lower_(set_value), upper_(set_value) {}
-			interval(real_type lower, real_type upper) : lower_(lower), upper_(upper) { keep_order(); }
+			interval(real_type lower, real_type upper) : lower_((lower<upper)? lower:upper), upper_((upper>lower)? upper:lower) {}
 			real_type lower() const { return lower_; }
 			real_type upper() const { return upper_; }
 			
-			void incr_indeterminate_result_count() { ++(stat_.indeterminate_result_count); }
-			void incr_arithmetic_op_count() { ++(stat_.arithmetic_op_count); }
+			static void incr_indeterminate_result_count() { ++(stat_.indeterminate_result_count); }
+			static void incr_arithmetic_op_count() { ++(stat_.arithmetic_op_count); }
 
 			interval& operator+=(const interval& obj){
 				real_type upper_Temp(0);
@@ -100,25 +91,17 @@ namespace ra::math {
 				else if((lower_ > real_type(0)) && (upper_ > real_type(0))){ return 1; }
 				else if((lower_ == real_type(0)) && (upper_ == real_type(0))){ return 0; }
 				else{
-					throw indeterminate_result("Indeterminate sign of interval");
-				}
-			}
-			int sign() {
-				if((lower_ < real_type(0)) && (upper_ < real_type(0))){ return -1; }
-				else if((lower_ > real_type(0)) && (upper_ > real_type(0))){ return 1; }
-				else if((lower_ == real_type(0)) && (upper_ == real_type(0))){ return 0; }
-				else{
 					incr_indeterminate_result_count();
 					throw indeterminate_result("Indeterminate sign of interval");
 				}
 			}
 
-			void clear_statistics() {
+			static void clear_statistics() {
 				stat_.indeterminate_result_count = 0;
 				stat_.arithmetic_op_count = 0;
 			}
 
-			void get_statistics(statistics& stat) {
+			static void get_statistics(statistics& stat) {
 				stat = stat_;
 			}
 
@@ -179,8 +162,7 @@ namespace ra::math {
 		if( (obj_A.upper()) < (obj_B.lower()) ) { return true; }
 		else if( (obj_A.lower()) >= (obj_B.upper()) ) { return false; }
 		else{
-			interval<real_type> temp;
-			temp.incr_indeterminate_result_count();
+			interval<real_type>::incr_indeterminate_result_count();
 			throw indeterminate_result("Indeterminate less than operator");
 		}
 	}
