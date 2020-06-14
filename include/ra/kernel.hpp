@@ -198,6 +198,51 @@ namespace ra::geometry {
 				else{ return false; }
 			}
 
+			// Tests if the flippable edge, with endpoints a and c and
+			// two incident faces abc and acd, is locally Delaunay.
+			// Precondition: The points a, b, c, and d have distinct
+			// values; the quadrilateral abcd must be strictly convex.
+			bool is_locally_delaunay_edge(const Point& a,const Point& b,const Point& c,const Point& d)const{
+				Oriented_side tst = side_of_oriented_circle(a,b,c,d);
+				if(tst == Oriented_side::on_positive_side){ return false; }
+				else{ return true; }
+			}
+
+			// Tests if the flippable edge, with endpoints a and c and
+			// two incident faces abc and acd, has the preferred-directions
+			// locally-Delaunay property with respect to the first and
+			// second directions u and v.
+			// Precondition: The points a, b, c, and d have distinct values;
+			// the vectors u and v are not zero vectors; the vectors u and
+			// v are neither parallel nor orthogonal.
+			bool is_locally_pd_delaunay_edge(const Point& a,const Point& b,const Point& c,const Point& d,const Vector& u,const Vector& v)const{
+				Oriented_side tst = side_of_oriented_circle(a,b,c,d);
+				if(tst == Oriented_side::on_positive_side){ return false; }
+				else if(tst == Oriented_side::on_negative_side){ return true; }
+				else{
+					if((preferred_direction(a,c,b,d,u)) > 0) { return true; }
+					else if( ((preferred_direction(a,c,b,d,u))==0) && ((preferred_direction(a,c,b,d,v))>0) ){
+						return true;
+					}
+					else{ return false;}
+				}
+			}
+
+			// Clear (i.e., set to zero) all kernel statistics.
+			static void clear_statistics(){
+				stat_.orientation_total_count=0;
+				stat_.orientation_exact_count=0;
+				stat_.preferred_direction_total_count=0;
+				stat_.preferred_direction_exact_count=0;
+				stat_.side_of_oriented_circle_total_count=0;
+				stat_.side_of_oriented_circle_exact_count=0;
+			}
+
+			// Get the current values of the kernel statistics.
+			static void get_statistics(Statistics& statistics){
+				statistics = stat_;
+			}
+
 		private:
 			static Statistics stat_;
 
