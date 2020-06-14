@@ -112,7 +112,7 @@ namespace ra::geometry {
 			// oriented circle passing through the points a, b, and c
 			// (in that order).
 			// Precondition: The points a, b, and c are not collinear.
-			Oriented_side side_of_oriented_circle(const Point& a, const Point& b, const Point& c, const Point& d){
+			Oriented_side side_of_oriented_circle(const Point& a, const Point& b, const Point& c, const Point& d)const{
 				try{
 					++(stat_.side_of_oriented_circle_total_count);
 					itv ax(a.x()); itv ay(a.y()); itv bx(b.x()); itv by(b.y()); itv cx(c.x()); itv cy(c.y());
@@ -138,6 +138,64 @@ namespace ra::geometry {
 					else if(det > exct(0)){ return (Oriented_side::on_positive_side); }
 					else{ return (Oriented_side::on_boundary); }
 				}
+			}
+
+			// Determines if, compared to the orientation of line
+			// segment cd, the orientation of the line segment ab is
+			// more close, equally close, or less close to the
+			// orientation of the vector v.
+			// The value returned is 1, 0, or -1 if, compared to the
+			// orientation of cd, the orientation of ab is more close,
+			// equally close, or less close to the orientation of v,
+			// respectively.
+			// Precondition: The points a and b have distinct values; the
+			// points c and d have distinct values; the vector v is not
+			// the zero vector.
+			int preferred_direction(const Point& a,const Point& b,const Point& c,const Point& d,const Vector& v)const{
+				try{
+					++(stat_.preferred_direction_total_count);
+					itv ax(a.x()); itv ay(a.y()); itv bx(b.x()); itv by(b.y());
+					itv cx(c.x()); itv cy(c.y()); itv dx(d.x()); itv dy(d.y());
+					itv vx(v.x()); itv vy(v.y());
+					itv first = ( (dx-cx)*(dx-cx) ) + ( (dy-cy)*(dy-cy) );
+					itv second_inc = ( (bx-ax)*(vx) ) + ( (by-ay)*(vy) );
+					itv second = second_inc * second_inc;
+					itv third = ( (bx-ax)*(bx-ax) ) + ( (by-ay)*(by-ay) );
+					itv fourth_inc = ( (dx-cx)*(vx) ) + ( (dy-cy)*(vy) );
+					itv fourth = fourth_inc * fourth_inc;
+					itv result = (first * second) - (third * fourth);
+					return (result.sign());
+				}
+				catch(const idr& e){
+					++(stat_.preferred_direction_exact_count);
+					exct ax(a.x()); exct ay(a.y()); exct bx(b.x()); exct by(b.y());
+					exct cx(c.x()); exct cy(c.y()); exct dx(d.x()); exct dy(d.y());
+					exct vx(v.x()); exct vy(v.y());
+					exct first = ( (dx-cx)*(dx-cx) ) + ( (dy-cy)*(dy-cy) );
+					exct second_inc = ( (bx-ax)*(vx) ) + ( (by-ay)*(vy) );
+					exct second = second_inc * second_inc;
+					exct third = ( (bx-ax)*(bx-ax) ) + ( (by-ay)*(by-ay) );
+					exct fourth_inc = ( (dx-cx)*(vx) ) + ( (dy-cy)*(vy) );
+					exct fourth = fourth_inc * fourth_inc;
+					exct result = (first * second) - (third * fourth);
+					if( result < exct(0) ) { return -1; }
+					else if( result > exct(0) ) { return 1; }
+					else { return 0; }
+				}
+			}
+
+			// Tests if the quadrilateral with vertices a, b, c, and d
+			// specified in CCW order is strictly convex.
+			// Precondition: The vertices a, b, c, and d have distinct
+			// values and are specified in CCW order.
+			bool is_strictly_convex_quad(const Point& a,const Point& b,const Point& c,const Point& d) const {
+				Orientation t_1 = orientation(a,b,c);
+				Orientation t_2 = orientation(b,c,d);
+				Orientation t_3 = orientation(c,d,a);
+				Orientation t_4 = orientation(d,a,b);
+				Orientation left = Orientation::left_turn;
+				if( (t_1==left) && (t_2==left) && (t_3==left) && (t_4==left) ){ return true; }
+				else{ return false; }
 			}
 
 		private:
