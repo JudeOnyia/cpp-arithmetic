@@ -193,8 +193,9 @@ namespace ra::geometry {
 				Orientation t_2 = orientation(b,c,d);
 				Orientation t_3 = orientation(c,d,a);
 				Orientation t_4 = orientation(d,a,b);
-				Orientation left = Orientation::left_turn;
-				if( (t_1==left) && (t_2==left) && (t_3==left) && (t_4==left) ){ return true; }
+				//Orientation left = Orientation::left_turn;
+				//if( (t_1==left) && (t_2==left) && (t_3==left) && (t_4==left) ){ return true; }
+				if( (t_2==t_1) && (t_3==t_1) && (t_4==t_1) ){ return true; }
 				else{ return false; }
 			}
 
