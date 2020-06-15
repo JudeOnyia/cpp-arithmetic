@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/judeonyia/Documents/ECE596C_Assignments/ECE596C_Assgn_3/cpp_arithmetic-JudeOnyia/cktmp/package-interval_orig/source/app/test_kernel.cpp
+CGAL/Cartesian.h
+-
+ra/kernel.hpp
+/home/judeonyia/Documents/ECE596C_Assignments/ECE596C_Assgn_3/cpp_arithmetic-JudeOnyia/cktmp/package-interval_orig/source/app/ra/kernel.hpp
+iostream
+-
+
+/home/judeonyia/Documents/ECE596C_Assignments/ECE596C_Assgn_3/cpp_arithmetic-JudeOnyia/cktmp/package-interval_orig/source/include/ra/interval.hpp
+cfenv
+-
+stdexcept
+-
+algorithm
+-
+iostream
+-
+
+/home/judeonyia/Documents/ECE596C_Assignments/ECE596C_Assgn_3/cpp_arithmetic-JudeOnyia/cktmp/package-interval_orig/source/include/ra/kernel.hpp
+CGAL/Cartesian.h
+-
+CGAL/MP_Float.h
+-
+cstddef
+-
+ra/interval.hpp
+/home/judeonyia/Documents/ECE596C_Assignments/ECE596C_Assgn_3/cpp_arithmetic-JudeOnyia/cktmp/package-interval_orig/source/include/ra/ra/interval.hpp
+

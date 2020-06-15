@@ -1,0 +1,11 @@
+Scanning dependencies of target test_kernel
+[ 50%] Building CXX object CMakeFiles/test_kernel.dir/app/test_kernel.cpp.o
+In file included from /home/judeonyia/Documents/ECE596C_Assignments/ECE596C_Assgn_3/cpp_arithmetic-JudeOnyia/cktmp/package-interval_orig/source/app/test_kernel.cpp:2:
+/home/judeonyia/Documents/ECE596C_Assignments/ECE596C_Assgn_3/cpp_arithmetic-JudeOnyia/cktmp/package-interval_orig/source/include/ra/kernel.hpp:25:35: warning: declaration ‘struct ra::math::indeterminate_result’ does not declare anything
+   25 |    using idr = typename ra::math::indeterminate_result;
+      |                                   ^~~~~~~~~~~~~~~~~~~~
+/home/judeonyia/Documents/ECE596C_Assignments/ECE596C_Assgn_3/cpp_arithmetic-JudeOnyia/cktmp/package-interval_orig/source/include/ra/kernel.hpp:27:32: warning: declaration ‘class CGAL::MP_Float’ does not declare anything
+   27 |    using exct = typename CGAL::MP_Float;
+      |                                ^~~~~~~~
+[100%] Linking CXX executable test_kernel
+[100%] Built target test_kernel

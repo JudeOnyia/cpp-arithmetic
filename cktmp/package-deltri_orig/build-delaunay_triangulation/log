@@ -1,0 +1,11 @@
+Scanning dependencies of target delaunay_triangulation
+[ 50%] Building CXX object CMakeFiles/delaunay_triangulation.dir/app/delaunay_triangulation.cpp.o
+In file included from /home/judeonyia/Documents/ECE596C_Assignments/ECE596C_Assgn_3/cpp_arithmetic-JudeOnyia/cktmp/package-deltri_orig/source/app/delaunay_triangulation.cpp:2:
+/home/judeonyia/Documents/ECE596C_Assignments/ECE596C_Assgn_3/cpp_arithmetic-JudeOnyia/cktmp/package-deltri_orig/source/include/ra/kernel.hpp:25:35: warning: declaration ‘struct ra::math::indeterminate_result’ does not declare anything
+   25 |    using idr = typename ra::math::indeterminate_result;
+      |                                   ^~~~~~~~~~~~~~~~~~~~
+/home/judeonyia/Documents/ECE596C_Assignments/ECE596C_Assgn_3/cpp_arithmetic-JudeOnyia/cktmp/package-deltri_orig/source/include/ra/kernel.hpp:27:32: warning: declaration ‘class CGAL::MP_Float’ does not declare anything
+   27 |    using exct = typename CGAL::MP_Float;
+      |                                ^~~~~~~~
+[100%] Linking CXX executable delaunay_triangulation
+[100%] Built target delaunay_triangulation

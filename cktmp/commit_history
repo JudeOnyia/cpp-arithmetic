@@ -1,0 +1,100 @@
+commit 2e5f4130237556ce16fe8499c8eb2cd218206a6c
+Author: JudeOnyia <60678029+JudeOnyia@users.noreply.github.com>
+Date:   Thu Jun 11 01:23:01 2020 -0700
+
+    First Commit
+
+commit 0fd81b4d2225985328adcc597aaf191bb0cb2421
+Author: Jude Onyia <judeonyia10@gmail.com>
+Date:   Thu Jun 11 18:12:27 2020 -0700
+
+    1) wrote indeterminate_result class
+    2) wrote rounding_mode_saver class
+    3) wrote statistics class
+    4) wrote default constructor and compound operator overloads (+,-,*)
+    5) wrote two argument constructor
+    6) wrote upper, lower, is_singleton and sign member functions
+
+commit 4d3078e339c39e99c68a742c23c559fa9c688e26
+Author: Jude Onyia <judeonyia10@gmail.com>
+Date:   Fri Jun 12 02:43:44 2020 -0700
+
+    1) Wrote clear_statistics member function
+    2) Wrote get_statistics member function
+    3) Wrote binary add, sub, mult non-member functions
+    4) Wrote less than operator overload
+    5) Wrote stream inserter
+
+commit e75ac306de5ff98af6a01dcae95bf65a26f5400a
+Author: JudeOnyia <60678029+JudeOnyia@users.noreply.github.com>
+Date:   Fri Jun 12 15:34:29 2020 -0700
+
+    Starting Kernel class
+
+commit 8d2796f420bc33bacd8221ec3cf952fec7cad7d0
+Author: Jude Onyia <judeonyia10@gmail.com>
+Date:   Fri Jun 12 20:58:07 2020 -0700
+
+    1) Wrote the types needed for the Kernel class
+    2) Wrote the Orientation and Oriented_side enum classes
+    3) Wrote Statistics struct
+    4) Wrote a template function to compute the determinant of a
+       3 by 3 matrix
+    5) Wrote the orientation member function that uses interval
+       arithmetic or exact arithmetic if interval yields indetermine
+       result
+
+commit 68ffe60f61a40f2c717223f08d1813940de3ed7c
+Author: Jude Onyia <judeonyia10@gmail.com>
+Date:   Sat Jun 13 01:09:36 2020 -0700
+
+    1) Wrote static function for solving determinant of 4 by 4 matrix
+    2) Wrote side_of_oriented_circle member function
+
+commit 4b77c1fe22e0c876a07c3a18482872e696002f97
+Author: Jude Onyia <judeonyia10@gmail.com>
+Date:   Sat Jun 13 18:55:44 2020 -0700
+
+    1) Wrote preferred_direction member function
+    2) Wrote is_strictly_convex_quad member function
+
+commit 26168d5d9d4049b1fb342bc49a4ece6f58d15306
+Author: Jude Onyia <judeonyia10@gmail.com>
+Date:   Sat Jun 13 23:11:03 2020 -0700
+
+    1) Wrote is_locally_delaunay_edge memeber function
+    2) Wrote is_locally_pd_delaunay_edge member function
+    3) Wrote clear_statistics member function
+    4) Wrote get_statistics member function
+
+commit 5db9ce8ba4110ace1ff6126d5ceda2164c813dee
+Author: Jude Onyia <judeonyia10@gmail.com>
+Date:   Sun Jun 14 00:52:55 2020 -0700
+
+    Added some static specifiers and did some const correctness
+
+commit 87a35d587bab40497e037dcb34c70dbc2a67bb24
+Author: JudeOnyia <60678029+JudeOnyia@users.noreply.github.com>
+Date:   Sun Jun 14 14:57:03 2020 -0700
+
+    Starting delaunay triangulation
+
+commit f479bf137e763c2e18e916d5c3f47ece25eecdb5
+Author: Jude Onyia <judeonyia10@gmail.com>
+Date:   Sun Jun 14 22:20:15 2020 -0700
+
+    1) Wrote function to check if half edge is flippable
+    2) Modified is_strictly_convex function in kernel.hpp
+
+commit 3813050045c41cffeade0ff47c11d88fc6816a55
+Author: Jude Onyia <judeonyia10@gmail.com>
+Date:   Mon Jun 15 00:31:57 2020 -0700
+
+    1) applied the Lawson local optimization procedure
+
+commit 301c29dfd89ae92f8524e4fb633cefe4c7df11b1
+Author: JudeOnyia <60678029+JudeOnyia@users.noreply.github.com>
+Date:   Mon Jun 15 00:45:17 2020 -0700
+
+    1) Removed traingulation_2_demo
+    2) Commented out cmakelists line of demo
