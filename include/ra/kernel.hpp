@@ -244,13 +244,25 @@ namespace ra::geometry {
 				statistics = stat_;
 			}
 
+			static Statistics make_stat(){
+				Statistics temp;
+				temp.orientation_total_count = 0;
+				temp.orientation_exact_count = 0;
+				temp.preferred_direction_total_count = 0;
+				temp.preferred_direction_exact_count = 0;
+				temp.side_of_oriented_circle_total_count = 0;
+				temp.side_of_oriented_circle_exact_count = 0;
+				return temp;
+			}
+
 		private:
 			static Statistics stat_;
 
 	};
 
 	template<class Real>
-	typename Kernel<Real>::Statistics Kernel<Real>::stat_ = {.orientation_total_count = 0, .orientation_exact_count = 0, .preferred_direction_total_count = 0, .preferred_direction_exact_count = 0, .side_of_oriented_circle_total_count = 0, .side_of_oriented_circle_exact_count = 0};
+	typename Kernel<Real>::Statistics Kernel<Real>::stat_ = Kernel<Real>::make_stat();
+	//{.orientation_total_count = 0, .orientation_exact_count = 0, .preferred_direction_total_count = 0, .preferred_direction_exact_count = 0, .side_of_oriented_circle_total_count = 0, .side_of_oriented_circle_exact_count = 0};
 	
 
 
