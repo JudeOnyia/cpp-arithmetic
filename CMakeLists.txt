@@ -17,5 +17,5 @@ link_libraries(${CGAL_LIBRARY} ${GMP_LIBRARIES})
 # Add Executable Program
 add_executable(test_interval app/test_interval.cpp)
 add_executable(test_kernel app/test_kernel.cpp)
-add_executable(triangulation_2_demo app/triangulation_2_demo.cpp app/triangulation_2.hpp)
+#add_executable(triangulation_2_demo app/triangulation_2_demo.cpp app/triangulation_2.hpp)
 add_executable(delaunay_triangulation app/delaunay_triangulation.cpp app/triangulation_2.hpp)
