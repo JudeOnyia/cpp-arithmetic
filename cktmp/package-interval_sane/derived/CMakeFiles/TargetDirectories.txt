@@ -1,5 +1,0 @@
-/home/judeonyia/Documents/ECE596C_Assignments/ECE596C_Assgn_3/cpp_arithmetic-JudeOnyia/cktmp/package-interval_sane/derived/CMakeFiles/rebuild_cache.dir
-/home/judeonyia/Documents/ECE596C_Assignments/ECE596C_Assgn_3/cpp_arithmetic-JudeOnyia/cktmp/package-interval_sane/derived/CMakeFiles/edit_cache.dir
-/home/judeonyia/Documents/ECE596C_Assignments/ECE596C_Assgn_3/cpp_arithmetic-JudeOnyia/cktmp/package-interval_sane/derived/CMakeFiles/delaunay_triangulation.dir
-/home/judeonyia/Documents/ECE596C_Assignments/ECE596C_Assgn_3/cpp_arithmetic-JudeOnyia/cktmp/package-interval_sane/derived/CMakeFiles/test_kernel.dir
-/home/judeonyia/Documents/ECE596C_Assignments/ECE596C_Assgn_3/cpp_arithmetic-JudeOnyia/cktmp/package-interval_sane/derived/CMakeFiles/test_interval.dir
