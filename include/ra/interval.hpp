@@ -121,8 +121,7 @@ namespace ra::math {
 	
 	template<class real_type>
 	typename interval<real_type>::statistics interval<real_type>::stat_ = interval<real_type>::make_stat();
-	//typename interval<real_type>::statistics interval<real_type>::stat_ = {.indeterminate_result_count = 0, .arithmetic_op_count = 0};
-
+	
 	template<class real_type>
 	interval<real_type> operator+(const interval<real_type>& obj_A, const interval<real_type>& obj_B){
 		real_type upper_Temp(0);

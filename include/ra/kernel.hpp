@@ -262,9 +262,6 @@ namespace ra::geometry {
 
 	template<class Real>
 	typename Kernel<Real>::Statistics Kernel<Real>::stat_ = Kernel<Real>::make_stat();
-	//{.orientation_total_count = 0, .orientation_exact_count = 0, .preferred_direction_total_count = 0, .preferred_direction_exact_count = 0, .side_of_oriented_circle_total_count = 0, .side_of_oriented_circle_exact_count = 0};
 	
-
-
 }
 #endif
